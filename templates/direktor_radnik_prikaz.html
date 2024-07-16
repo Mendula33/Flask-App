@@ -6,6 +6,8 @@
     {% for radnik in radnici %}
     <title>Profil: {{ radnik[1] }} {{ radnik[2] }}</title>
     {% endfor %}
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     {% for radnik in radnici %}
@@ -33,6 +35,9 @@
                     <h3 class="text">Datum Isplate: {{ isplata[1] }}, Suma: {{ isplata[2] }}$, Odobrio Direktor: {{ isplata[3] }}</h3>
                     {% endfor %}
                 </div>
+            </div>
+            <div class="btn-wrapper">
+                <button class="btn"><a href="{{ url_for('direktor_radnik_isplata', radnik_username=radnik[11]) }}">Vidi vise</a></button>
             </div>
         </div>
     </section>

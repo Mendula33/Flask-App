@@ -62,5 +62,14 @@ def direktor_radnik_detalji(radnik_username):
     else:
         return 'Radnik not found', 404
 
+
+#Obracun svih radnih sati
+@app.route('/isplati-sve-sate/<radnik_username>', methods=['POST'])
+def direktor_radnik_isplata(radnik_username):
+    radnici = function.prikaz_podataka_radnik(radnik_username)
+    
+    return render_template('direktor_radnik_isplata.html', radnici=radnici)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
