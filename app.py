@@ -64,11 +64,19 @@ def direktor_radnik_detalji(radnik_username):
 
 
 #Obracun svih radnih sati
-@app.route('/isplati-sve-sate/<radnik_username>', methods=['POST'])
+@app.route('/direktor_radnik_isplata/<radnik_username>', methods=['GET', 'POST'])
 def direktor_radnik_isplata(radnik_username):
-    radnici = function.prikaz_podataka_radnik(radnik_username)
-    
-    return render_template('direktor_radnik_isplata.html', radnici=radnici)
+    if request.method == 'POST':
+        # Handle the POST request
+        radnici = function.prikaz_podataka_radnik(radnik_username)
+        tr_br_sati = float(request.form['tr_br_sati'])
+        satnica = radnici[13]  # assuming radnici[13] is the hourly rate
+        suma = tr_br_sati * satnica
+        function.perform_payment(radnik_username, suma)
+        return render_template('direktor_radnik_isplata.html', radnici=radnici, suma=suma)
+    else:
+        # Handle the GET request
+        return redirect(url_for('direktor_radnik_detalji', radnik_username=radnik_username))
 
 
 if __name__ == '__main__':

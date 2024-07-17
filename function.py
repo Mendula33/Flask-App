@@ -136,3 +136,10 @@ WHERE
 """
     db.cursorRadnik.execute(upit, (username,))
     return db.cursorRadnik.fetchall()
+##############################################################################
+
+#Funkcija za isplatu svih sata 
+def perform_payment(radnik_username, suma):
+    # Update the employee's data
+    db.cursorDirektor.execute("UPDATE employees SET isplata = isplata + %s WHERE username = %s", (suma, radnik_username))
+    db.cursorDirektor.commit()

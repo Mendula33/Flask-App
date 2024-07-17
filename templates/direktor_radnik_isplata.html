@@ -15,14 +15,10 @@
 </head>
 <body>
     {% for radnik in radnici %}
-    <form action="/direktor_radnik_isplata" method="post">
+    <form action="/direktor_radnik_isplata/{{ radnik[11] }}" method="post">
         <label class="login-label" for="tr_br_sati">Trenutan broj radnih sati: {{ radnik[9] }}</label>
-        <input class="login-input" type="number" name="tr_br_sati" placeholder="Molimo vas unsite broj sati koji zelite da isplatite" required oninput="updateSum(this, document.getElementById('satnica-{{ loop.index0 }}'), document.getElementById('suma-{{ loop.index0 }}'))">
-
-        <label class="login-label" for="satnica" id="satnica-{{ loop.index0 }}">Satnica: {{ radnik[13] }} </label>
-
-        <label class="login-label" id="suma-{{ loop.index0 }}">Suma za isplatu: </label>
-
+        <input class="login-input" type="number" name="tr_br_sati" placeholder="Molimo vas unsite broj sati koji zelite da isplatite" required>
+    
         <input class="login-btn" type="submit" value="Izvrsite uplatu">
     </form>
     {% endfor %}
